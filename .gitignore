@@ -1,0 +1,15 @@
+.env
+.venv
+tmp/
+temp/
+
+node_modules/
+bower_components/
+*.log
+
+
+build/
+dist/
+assets/marea_intro.mov
+
+__pycache__/
