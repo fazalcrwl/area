@@ -12,4 +12,4 @@ build/
 dist/
 assets/marea_intro.mov
 
-__pycache__/
+__pycache__/area.json
