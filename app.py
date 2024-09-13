@@ -5,6 +5,7 @@ from flask_cors import CORS
 from Video_creation import ConstructVideo
 from moviepy.config import change_settings
 import shutil
+import threading
 
 change_settings(change_settings({"IMAGEMAGICK_BINARY": "/usr/local/bin/magick"}))
 app = Flask(__name__)
@@ -27,25 +28,38 @@ def home():
         </form>
     '''
 
+def async_construct_video(uuid):
+    video = ConstructVideo(uuid)    
+    # call the end point 
+
+
 @app.route('/get_video', methods=['POST'])
 def get_video():
 
     uuid = request.form.get('uuid')
     
     if not uuid:
-        return jsonify({"error": "UUID and output directory are required."}), 400
+        return jsonify({"error": "UUID is required."}), 400
 
-    ConstructVideo(uuid)
-    video_path = f"tmp/{uuid}/save/final_video.mp4"
+    # Start the video construction process in a new thread
+    video_thread = threading.Thread(target=async_construct_video, args=(uuid,))
+    video_thread.start()
 
-    return send_file(video_path, as_attachment=True)
+    # Return a response that the process has started
+    return jsonify({"message": f"Video construction process for UUID {uuid} has started."}), 202
+
 
 
 
 @app.route('/remove_video_uuid', methods=['POST'])
 def remove_video_uuid():
+
     uuid = request.form.get('uuid')
+    key = request.form.get('key')
     
+    if not (key == '8ce1122516288b1029ba21fd0718925d793ccc91e01bd0bac55b0323953887ba1f16'):
+        return jsonify({"error": "Invalid Key"}), 404
+
     if not uuid:
         return jsonify({"error": "UUID is required."}), 400
     
