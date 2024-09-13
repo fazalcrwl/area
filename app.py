@@ -35,7 +35,7 @@ def get_video():
     if not uuid:
         return jsonify({"error": "UUID and output directory are required."}), 400
 
-    #ConstructVideo(uuid)
+    ConstructVideo(uuid)
     video_path = f"tmp/{uuid}/save/final_video.mp4"
 
     return send_file(video_path, as_attachment=True)
