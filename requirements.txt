@@ -1,0 +1,13 @@
+requests
+pillow
+spacy
+python-dotenv
+transformers
+moviepy
+torchvision
+torch
+torchaudio
+psycopg2-binary
+Flask-Cors
+flask
+openai

@@ -29,7 +29,8 @@ def home():
     '''
 
 def async_construct_video(uuid):
-    video = ConstructVideo(uuid)    
+    video = ConstructVideo(uuid)
+     
     # call the end point 
 
 
