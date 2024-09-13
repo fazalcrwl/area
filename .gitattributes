@@ -1,3 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-marea_intro.mov filter=lfs diff=lfs merge=lfs -text
+assets/marea_intro.mov filter=lfs diff=lfs merge=lfs -text
+
